@@ -12,8 +12,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.config.Configuration;
 import me.mjnt.gobcoinsmod.ConfigHandler;
 
-// TODO set config value of coins to 0 on execute of command
-
 public class ResetCoinsCommand extends CommandBase {
 
     @Override
@@ -27,7 +25,18 @@ public class ResetCoinsCommand extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+    public boolean canCommandSenderUseCommand(ICommandSender sender) {
+        return true;
+    }
 
+    @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
+
+    @Override
+    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+        ConfigHandler.writeIntConfig("coins", "goblins", 0);
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD+"Goblin counter set to 0."));
     }
 }

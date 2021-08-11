@@ -12,7 +12,7 @@ Credits to DSM
 public class ConfigHandler {
 
     public static Configuration config;
-    private final static String file = "config/colormod.cfg";
+    private final static String file = "config/goblin_coins.cfg";
 
     public static void init() {
         config = new Configuration(new File(file));
@@ -55,6 +55,21 @@ public class ConfigHandler {
         return true;
     }
 
+    public static int getInt(String category, String key) {
+        config = new Configuration(new File(file));
+        try {
+            config.load();
+            if (config.getCategory(category).containsKey(key)) {
+                return config.get(category, key, 0).getInt();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            config.save();
+        }
+        return 0;
+    }
+
     public static boolean hasKey(String category, String key) {
         config = new Configuration(new File(file));
         try {
@@ -95,6 +110,19 @@ public class ConfigHandler {
         }
     }
 
+    public static void writeIntConfig(String category, String key, int value) {
+        config = new Configuration(new File(file));
+        try {
+            config.load();
+            int set = config.get(category, key, value).getInt();
+            config.getCategory(category).get(key).set(value);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            config.save();
+        }
+    }
+
     public static String initString(String category, String key, String defaultValue) {
         if (!hasKey(category, key)) {
             writeStringConfig(category, key, defaultValue);
@@ -110,6 +138,15 @@ public class ConfigHandler {
             return defaultValue;
         } else {
             return getBoolean(category, key);
+        }
+    }
+
+    public static int initInt(String category, String key, int defaultValue) {
+        if (!hasKey(category, key)) {
+            writeIntConfig(category, key, defaultValue);
+            return defaultValue;
+        } else {
+            return getInt(category, key);
         }
     }
 }
