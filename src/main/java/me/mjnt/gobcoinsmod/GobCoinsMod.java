@@ -46,7 +46,6 @@ public class GobCoinsMod
     public void init(FMLInitializationEvent event)
     {
         logger.info("initialise FMLServerStartingEvent: " + NAME);
-        FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
