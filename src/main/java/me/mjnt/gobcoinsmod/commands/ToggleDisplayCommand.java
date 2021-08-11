@@ -9,10 +9,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
-import net.minecraftforge.common.config.Configuration;
 import me.mjnt.gobcoinsmod.ConfigHandler;
-
-// TODO set config to False to be referenced in screen renderer
 
 public class ToggleDisplayCommand extends CommandBase {
     @Override
@@ -26,7 +23,24 @@ public class ToggleDisplayCommand extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+    public boolean canCommandSenderUseCommand(ICommandSender sender) {
+        return true;
+    }
 
+    @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
+
+    @Override
+    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+        Boolean toggled = ConfigHandler.getBoolean("toggles", "display");
+        if (toggled == true) {
+            ConfigHandler.writeBooleanConfig("toggles", "display", false);
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD+"Display toggle set to FALSE."));
+        } else {
+            ConfigHandler.writeBooleanConfig("toggles", "display", true);
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD+"Display toggle set to TRUE."));
+        }
     }
 }

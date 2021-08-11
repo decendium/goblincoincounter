@@ -2,6 +2,7 @@ package me.mjnt.gobcoinsmod;
 
 
 import me.mjnt.gobcoinsmod.commands.ResetCoinsCommand;
+import me.mjnt.gobcoinsmod.commands.ToggleDisplayCommand;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -29,6 +30,7 @@ public class GobCoinsMod
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         ClientCommandHandler.instance.registerCommand(new ResetCoinsCommand());
+        ClientCommandHandler.instance.registerCommand(new ToggleDisplayCommand());
     }
 
     @EventHandler
