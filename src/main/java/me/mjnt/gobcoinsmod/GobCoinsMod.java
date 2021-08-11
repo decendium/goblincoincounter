@@ -2,6 +2,7 @@ package me.mjnt.gobcoinsmod;
 
 
 import me.mjnt.gobcoinsmod.commands.ResetCoinsCommand;
+import me.mjnt.gobcoinsmod.commands.SetPosCommand;
 import me.mjnt.gobcoinsmod.commands.ToggleDisplayCommand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -24,9 +25,6 @@ import org.apache.logging.log4j.Logger;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-// Main mod file, will fix things later
-// TODO make positions of gui thing customizable with a /setpos command or something that takes x and y coords as parameters
-
 @Mod(modid = GobCoinsMod.MODID, name = GobCoinsMod.NAME, version = GobCoinsMod.VERSION)
 public class GobCoinsMod
 {
@@ -41,6 +39,7 @@ public class GobCoinsMod
         logger = event.getModLog();
         ClientCommandHandler.instance.registerCommand(new ResetCoinsCommand());
         ClientCommandHandler.instance.registerCommand(new ToggleDisplayCommand());
+        ClientCommandHandler.instance.registerCommand(new SetPosCommand());
     }
 
     @EventHandler
@@ -71,10 +70,12 @@ public class GobCoinsMod
             return;
         }
         int coinamt = ConfigHandler.getInt("coins", "goblins");
+        int posX = ConfigHandler.getInt("location", "x");
+        int posY = ConfigHandler.getInt("location", "y");
         String coinTotalStr = NumberFormat.getNumberInstance(Locale.US).format(coinamt);
         if (displayToggled == true) {
             FontRenderer fRender = Minecraft.getMinecraft().fontRendererObj;
-            fRender.drawString(EnumChatFormatting.GOLD + "Goblin Coin Drops: " + EnumChatFormatting.WHITE + coinTotalStr, 5, 5, 0);
+            fRender.drawString(EnumChatFormatting.GOLD + "Goblin Coin Drops: " + EnumChatFormatting.WHITE + coinTotalStr, posX, posY, 0);
         }
     }
 }
