@@ -12,6 +12,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.config.Configuration;
 import me.mjnt.gobcoinsmod.ConfigHandler;
 
+// TODO set config value of coins to 0 on execute of command
+
 public class ResetCoinsCommand extends CommandBase {
 
     @Override

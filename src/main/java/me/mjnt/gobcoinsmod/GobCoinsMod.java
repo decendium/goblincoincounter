@@ -11,6 +11,11 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 import org.apache.logging.log4j.Logger;
 
+// Main mod file, will fix things later
+// TODO chat detector and screen renderer
+
+// TODO make positions of gui thing customizable with a /setpos command or something that takes x and y coords as parameters
+
 @Mod(modid = GobCoinsMod.MODID, name = GobCoinsMod.NAME, version = GobCoinsMod.VERSION)
 public class GobCoinsMod
 {

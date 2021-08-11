@@ -12,6 +12,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.config.Configuration;
 import me.mjnt.gobcoinsmod.ConfigHandler;
 
+// TODO set config to False to be referenced in screen renderer
 
 public class ToggleDisplayCommand extends CommandBase {
     @Override
