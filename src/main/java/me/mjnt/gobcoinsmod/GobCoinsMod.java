@@ -32,6 +32,11 @@ public class GobCoinsMod
     public static final String VERSION = "1.0";
     public static final String NAME = "Goblin Coins Mod";
 
+    public static int coinAmount = -1;
+    public static int posX = -1;
+    public static int posY = -1;
+    public static Boolean displayToggled = null;
+
     public static Logger logger;
 
     @EventHandler
@@ -59,22 +64,34 @@ public class GobCoinsMod
             int coins = Integer.parseInt(message);
             int configCoins = ConfigHandler.getInt("coins", "goblins");
             int totalCoins = coins + configCoins;
+            coinAmount = totalCoins;
             ConfigHandler.writeIntConfig("coins", "goblins", totalCoins);
         }
     }
+
     @SubscribeEvent
     public void render(RenderGameOverlayEvent event) {
-        Boolean displayToggled = ConfigHandler.getBoolean("toggles", "display");
         if (event.isCancelable() || event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) {
             return;
         }
-        int coinamt = ConfigHandler.getInt("coins", "goblins");
-        int posX = ConfigHandler.getInt("location", "x");
-        int posY = ConfigHandler.getInt("location", "y");
-        String coinTotalStr = NumberFormat.getNumberInstance(Locale.US).format(coinamt);
+
+        if (displayToggled == null) {
+            displayToggled = ConfigHandler.getBoolean("toggles", "display");
+        }
+
+        if (coinAmount == -1) {
+            coinAmount = ConfigHandler.getInt("coins", "goblins");
+        }
+
+        if (posX == -1 && posY == -1) {
+            posX = ConfigHandler.getInt("location", "x");
+            posY = ConfigHandler.getInt("location", "y");
+        }
+
+        String coinTotalStr = NumberFormat.getNumberInstance(Locale.US).format(coinAmount);
         if (displayToggled == true) {
-            FontRenderer fRender = Minecraft.getMinecraft().fontRendererObj;
-            fRender.drawString(EnumChatFormatting.GOLD + "Goblin Coin Drops: " + EnumChatFormatting.WHITE + coinTotalStr, posX, posY, 0);
+                FontRenderer fRender = Minecraft.getMinecraft().fontRendererObj;
+                fRender.drawString(EnumChatFormatting.GOLD + "Goblin Coin Drops: " + EnumChatFormatting.WHITE + coinTotalStr, posX, posY, 0);
         }
     }
 }

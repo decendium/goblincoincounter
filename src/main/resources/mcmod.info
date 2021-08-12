@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "GobCoins",
+  "name": "Goblin Coins Mod",
+  "description": "Mod that counts goblin coin drops",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["mjnt", "Cobble8"],
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

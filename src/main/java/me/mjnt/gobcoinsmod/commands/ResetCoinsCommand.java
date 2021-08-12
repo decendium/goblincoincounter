@@ -1,5 +1,6 @@
 package me.mjnt.gobcoinsmod.commands;
 
+import me.mjnt.gobcoinsmod.GobCoinsMod;
 import net.minecraft.client.Minecraft;
 
 import net.minecraft.command.CommandBase;
@@ -9,7 +10,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
-import net.minecraftforge.common.config.Configuration;
 import me.mjnt.gobcoinsmod.ConfigHandler;
 
 public class ResetCoinsCommand extends CommandBase {
@@ -36,7 +36,8 @@ public class ResetCoinsCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+        GobCoinsMod.coinAmount = 0;
         ConfigHandler.writeIntConfig("coins", "goblins", 0);
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD+"Goblin counter set to 0."));
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD+"Goblin coin counter set to 0."));
     }
 }

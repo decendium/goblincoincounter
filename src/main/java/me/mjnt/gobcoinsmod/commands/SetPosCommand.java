@@ -1,6 +1,7 @@
 package me.mjnt.gobcoinsmod.commands;
 
 import me.mjnt.gobcoinsmod.ConfigHandler;
+import me.mjnt.gobcoinsmod.GobCoinsMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -34,10 +35,10 @@ public class SetPosCommand extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         String posXstr = args[0];
         String posYstr = args[1];
-        int posX = Integer.parseInt(posXstr);
-        int posY = Integer.parseInt(posYstr);
-        ConfigHandler.writeIntConfig("location", "x", posX);
-        ConfigHandler.writeIntConfig("location", "y", posY);
+        GobCoinsMod.posX = Integer.parseInt(posXstr);
+        GobCoinsMod.posY = Integer.parseInt(posYstr);
+        ConfigHandler.writeIntConfig("location", "x", GobCoinsMod.posX);
+        ConfigHandler.writeIntConfig("location", "y", GobCoinsMod.posY);
         Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD+"X position set to " + posXstr + ", and Y position set to " + posYstr + "."));
     }
 }

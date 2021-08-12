@@ -1,5 +1,6 @@
 package me.mjnt.gobcoinsmod.commands;
 
+import me.mjnt.gobcoinsmod.GobCoinsMod;
 import net.minecraft.client.Minecraft;
 
 import net.minecraft.command.CommandBase;
@@ -36,9 +37,11 @@ public class ToggleDisplayCommand extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         Boolean toggled = ConfigHandler.getBoolean("toggles", "display");
         if (toggled == true) {
+            GobCoinsMod.displayToggled = false;
             ConfigHandler.writeBooleanConfig("toggles", "display", false);
             Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD+"Display toggle set to FALSE."));
         } else {
+            GobCoinsMod.displayToggled = true;
             ConfigHandler.writeBooleanConfig("toggles", "display", true);
             Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD+"Display toggle set to TRUE."));
         }
